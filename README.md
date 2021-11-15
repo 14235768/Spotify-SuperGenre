@@ -1,4 +1,5 @@
 # Spotify-SuperGenre
+![newplot](https://user-images.githubusercontent.com/47429809/141818288-60ed25b0-3f7e-4b84-96b8-6322ace7d644.png)
 
 ### **1. Data Collection**
    - There are two files for Data Collection: **"get_data.py"** and **"get_sample.py"**
