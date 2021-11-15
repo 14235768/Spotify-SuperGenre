@@ -15,7 +15,6 @@ client_secret = '515de80f08b64bfa98a7e3a820e1f744'
 client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-#https://open.spotify.com/playlist/3KUsPCxYIJ2USNFgseLLNn?si=36da1a4519cf47d7
 # Get TrackID for my playlist
 def get_playlist_track_ids(username, playlist_id):
   ids = []
@@ -26,8 +25,8 @@ def get_playlist_track_ids(username, playlist_id):
     tracks.extend(results['items'])
     for item in tracks:
       ids.append(item['track']['id'])
-  #CHECKPOINT 1
-  print(len(ids))
+  #CHECKPOINT 1 (uncomment to use)
+  #print(len(ids))
   return ids
 
 ids = get_playlist_track_ids('31a4nfvxz7zlukmsaony5ml5mdgi','3KUsPCxYIJ2USNFgseLLNn')
@@ -74,12 +73,12 @@ def getTrackFeatures(id):
 # loop over track ids
 tracks = []
 for i in range(len(ids)):
-  time.sleep(.5)
+  #time.sleep(.5) (uncomment if needed)
   track = getTrackFeatures(ids[i])
   tracks.append(track)
 
-#CHECKPOINT 2
-print(len(tracks))
+#CHECKPOINT 2 (uncomment to use)
+#print(len(tracks))
 
 
 # create dataset
