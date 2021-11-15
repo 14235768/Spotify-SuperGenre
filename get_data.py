@@ -17,8 +17,7 @@ client_secret = '515de80f08b64bfa98a7e3a820e1f744'
 client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-#https://open.spotify.com/playlist/3KUsPCxYIJ2USNFgseLLNn?si=36da1a4519cf47d7
-# Get TrackID for my playlist
+# Get TrackID from the playlist
 def get_playlist_track_ids(username, playlist_id):
   ids = []
   results = sp.user_playlist_tracks(username, playlist_id)
@@ -32,11 +31,12 @@ def get_playlist_track_ids(username, playlist_id):
           ids.append(item['track']['id'])
       except:
         pass
-  #CHECKPOINT 1
-  print("ids done")
-  print(len(ids))
+  #CHECKPOINT 1 (Uncomment to use)
+  #print("ids done")
+  #print(len(ids))
   return ids
 
+#Get Track IDs
 ids = get_playlist_track_ids('thedoctorkto','54nv8jbrm4JoHEZ49Qvjgl')
 
 # Get Track Features and Genres
@@ -70,7 +70,6 @@ def getTrackFeatures(id):
   """
   #Spotify does not have genre for each track, so instead, we will retrieve artists' genres
   """
-
   artist_id = sp.artist(meta['album']['artists'][0]['external_urls']['spotify'])
   genres = artist_id['genres']
 
@@ -79,18 +78,17 @@ def getTrackFeatures(id):
 
 
 
-
 # loop over track ids
 print("looping over track ids now")
 tracks = []
 for i in range(len(ids)):
-  #time.sleep(.5)
+  #time.sleep(.5) #uncomment if needed
   track = getTrackFeatures(ids[i])
   tracks.append(track)
 
-#CHECKPOINT 2
-print("tracks done")
-print(len(tracks))
+#CHECKPOINT 2 (uncomment to use)
+#print("tracks done")
+#print(len(tracks))
 
 # create dataset
 df = pd.DataFrame(tracks, columns = ['name', 'album', 'artist', 'release_date', 'duration_ms', 'popularity', 'acousticness', 'danceability', 'energy', 'key', 'mode', 'instrumentalness', 'liveness', 'loudness', 'speechiness', 'valence','tempo', 'time_signature', 'genres'])
