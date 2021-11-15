@@ -10,9 +10,6 @@ user profile: https://open.spotify.com/user/thedoctorkto?si=076972bde6114637
 songs total: 9964 songs
 runtime: 622hrs 1min
 """
-# Client ID set-up for API
-client_id = '48635fa9d1ec447e8c7cc9ac846aaa28'
-client_secret = '515de80f08b64bfa98a7e3a820e1f744'
 
 client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -31,13 +28,11 @@ def get_playlist_track_ids(username, playlist_id):
           ids.append(item['track']['id'])
       except:
         pass
-  #CHECKPOINT 1 (Uncomment to use)
-  #print("ids done")
-  #print(len(ids))
   return ids
 
 #Get Track IDs
 ids = get_playlist_track_ids('thedoctorkto','54nv8jbrm4JoHEZ49Qvjgl')
+
 
 # Get Track Features and Genres
 def getTrackFeatures(id):
@@ -66,6 +61,7 @@ def getTrackFeatures(id):
   tempo = features[0]['tempo']
   time_signature = features[0]['time_signature']
 
+  
   #Get Genre
   """
   #Spotify does not have genre for each track, so instead, we will retrieve artists' genres
@@ -76,8 +72,6 @@ def getTrackFeatures(id):
   track = [name, album, artist, release_date, duration_ms, popularity, acousticness, danceability, energy, key, mode, instrumentalness, liveness, loudness, speechiness, valence, tempo, time_signature, genres]
   return track
 
-
-
 # loop over track ids
 print("looping over track ids now")
 tracks = []
@@ -86,9 +80,6 @@ for i in range(len(ids)):
   track = getTrackFeatures(ids[i])
   tracks.append(track)
 
-#CHECKPOINT 2 (uncomment to use)
-#print("tracks done")
-#print(len(tracks))
 
 # create dataset
 df = pd.DataFrame(tracks, columns = ['name', 'album', 'artist', 'release_date', 'duration_ms', 'popularity', 'acousticness', 'danceability', 'energy', 'key', 'mode', 'instrumentalness', 'liveness', 'loudness', 'speechiness', 'valence','tempo', 'time_signature', 'genres'])
